@@ -22,17 +22,17 @@ train_datagen = ImageDataGenerator(rescale=1./255,
                                 width_shift_range=0.2,
                                 height_shift_range=0.2,
                                 vertical_flip=True,
-                                horizontal_fip=True,
+                                horizontal_flip=True,
                                 fill_mode='nearest')
 
 val_datagen = ImageDataGenerator(rescale=1./255)
 
 train_generator = train_datagen.flow_from_directory(directory=train_dir,
-                                                   class_mode='nearest',
+                                                   class_mode='categorical',
                                                    target_size=(150, 150))
 
 val_generator = val_datagen.flow_from_directory(directory=val_dir,
-                                               class_mode='nearest',
+                                               class_mode='categorical',
                                                target_size=(150, 150))
                                             
 # Check the classes index
@@ -43,7 +43,7 @@ print(val_generator.class_indices)
 # Define a machine learning model
 model = tf.keras.models.Sequential([
     # first convolution with 64 units
-    tf.keras.layers.Conv2D(64, (3, 3), activation="relu"),
+    tf.keras.layers.Conv2D(64, (3, 3), activation="relu", input_shape=(150, 150, 3)),
     # first 2x2 maxpooling
     tf.keras.layers.MaxPooling2D(2, 2),
     # second convolution with 64 units
@@ -69,7 +69,7 @@ model = tf.keras.models.Sequential([
 # Compile the model
 model.compile(optimizer="rmsprop", 
             loss="categorical_crossentropy", 
-            metrics=[tf.keras.layers.metrics.Precision(), tf.keras.metrics.Recall(), 'accuracy'])
+            metrics=[tf.keras.metrics.Precision(), tf.keras.metrics.Recall(), 'accuracy'])
 
 # Summary of the model
 model.summary()
