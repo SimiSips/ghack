@@ -1,3 +1,4 @@
 tensorflow
 matplotlib
 split-folders
+django
