@@ -6,3 +6,5 @@ from django.shortcuts import render
 
 # Load the machine learning model
 model = load_model("deephospital_model")
+
+def prediction(request):
