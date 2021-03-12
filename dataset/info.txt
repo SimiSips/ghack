@@ -1,0 +1,4 @@
+Datasets too big to fit in
+
+Pneumonia Dataset: https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia
+Skin Cancer Dataset: https://www.kaggle.com/fanconic/skin-cancer-malignant-vs-benign
