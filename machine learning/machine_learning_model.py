@@ -76,3 +76,13 @@ model.summary()
 
 # Train the model
 model.fit(train_generator, epochs=25, validation_data=val_generator, callbacks=[tensorboard])
+
+# Evaluate the model
+loss, accuracy, precision, recall = model.evaluate(val_generator)
+
+f1score = 2*((precision * recall) / (precision + recall))
+print("Accuray: " + str(accuracy))
+print("Loss: " + str(loss))
+print("Precision: " + str(precision))
+print("Recall: " + str(recall))
+print("F1 Score: " + str(f1score))
