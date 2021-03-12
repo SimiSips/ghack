@@ -11,5 +11,5 @@ def register(request):
             messages.success(request, F"Your account has been created for {username}! You are now able to login!")
             return redirect('admin')
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm()
     return render(request, 'users/register.html', {'form' : form})

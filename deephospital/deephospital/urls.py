@@ -5,4 +5,5 @@ from users import views as user_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
+    path('radiologist', include('app.urls'))
 ]
