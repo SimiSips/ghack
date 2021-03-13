@@ -1,10 +1,18 @@
-# Import necessary libaries
-from tensorflow.keras.models import load_model
-import cv2 
-import numpy as np 
 from django.shortcuts import render
+from .forms import ImageForm
+from tensorflow.keras.models import load_model
 
-# Load the machine learning model
-model = load_model("deephospital_model")
 
-def prediction(request):
+def image_upload_view(request):
+    """Process images uploaded by users"""
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Get the current instance object to display in the template
+            img_obj = form.instance
+            return render(request, 'main/upload.html', {'form': form, 'img_obj': img_obj})
+            image = form.cleaned_data['image']
+    else:
+        form = ImageForm()
+    return render(request, 'main/upload.html', {'form': form})
